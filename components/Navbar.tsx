@@ -51,6 +51,20 @@ export default function Navbar() {
           </a>
 
           <a
+            href="#nosotros"
+            className="text-sm font-medium transition hover:opacity-60"
+          >
+            Nosotros
+          </a>
+
+          <a
+            href="#reservas"
+            className="text-sm font-medium transition hover:opacity-60"
+          >
+            Reservas
+          </a>
+
+          <a
             href="#contacto"
             className="text-sm font-medium transition hover:opacity-60"
           >
