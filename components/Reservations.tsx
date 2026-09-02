@@ -11,31 +11,13 @@ const services = [
   "Cejas & Mirada",
 ];
 
-const professionals = [
-  "Sin preferencia",
-  "Sofía",
-  "Valentina",
-  "Camila",
-];
+const professionals = ["Sofía", "Valentina", "Camila"];
 
-const times = [
-  "09:00",
-  "10:30",
-  "12:00",
-  "14:30",
-  "16:00",
-  "17:30",
-];
+const times = ["09:00", "10:30", "12:00", "14:30", "16:00", "17:30"];
 
 type FieldErrors = Partial<
   Record<
-    | "name"
-    | "email"
-    | "phone"
-    | "service"
-    | "professional"
-    | "date"
-    | "time",
+    "name" | "email" | "phone" | "service" | "professional" | "date" | "time",
     string[]
   >
 >;
@@ -53,6 +35,60 @@ export default function Reservations() {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+
+  const [selectedProfessional, setSelectedProfessional] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
+  const [occupiedTimes, setOccupiedTimes] = useState<string[]>([]);
+  const [isLoadingTimes, setIsLoadingTimes] = useState(false);
+  const [availabilityError, setAvailabilityError] = useState("");
+
+  function getToday() {
+    const now = new Date();
+
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  }
+
+  async function loadAvailability(professional: string, date: string) {
+    setSelectedTime("");
+    setAvailabilityError("");
+
+    if (!professional || !date) {
+      setOccupiedTimes([]);
+      return;
+    }
+
+    setIsLoadingTimes(true);
+
+    try {
+      const params = new URLSearchParams({
+        professional,
+        date,
+      });
+
+      const response = await fetch(
+        `/api/reservations/availability?${params.toString()}`,
+      );
+
+      if (!response.ok) {
+        throw new Error();
+      }
+
+      const data: { occupiedTimes: string[] } = await response.json();
+
+      setOccupiedTimes(data.occupiedTimes);
+    } catch {
+      setOccupiedTimes(times);
+      setAvailabilityError(
+        "No pudimos consultar los horarios. Intenta nuevamente.",
+      );
+    } finally {
+      setIsLoadingTimes(false);
+    }
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -103,6 +139,10 @@ export default function Reservations() {
       }
 
       setSuccessMessage(data.message);
+
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 4000);
 
       form.reset();
       setSelectedTime("");
@@ -275,9 +315,19 @@ export default function Reservations() {
                 <select
                   id="professional"
                   name="professional"
-                  defaultValue="Sin preferencia"
+                  defaultValue=""
+                  required
+                  onChange={(event) => {
+                    const professional = event.target.value;
+
+                    setSelectedProfessional(professional);
+                    void loadAvailability(professional, selectedDate);
+                  }}
                   className="w-full rounded-2xl border border-[#D8C3B5] bg-[#F7F3EE] px-4 py-3 outline-none transition focus:border-[#B76E79] dark:border-[#4A3E43] dark:bg-[#171416]"
                 >
+                  <option value="" disabled>
+                    Selecciona una profesional
+                  </option>
                   {professionals.map((professional) => (
                     <option key={professional} value={professional}>
                       {professional}
@@ -299,7 +349,14 @@ export default function Reservations() {
                   id="date"
                   name="date"
                   type="date"
+                  min={getToday()}
                   required
+                  onChange={(event) => {
+                    const date = event.target.value;
+
+                    setSelectedDate(date);
+                    void loadAvailability(selectedProfessional, date);
+                  }}
                   className="w-full rounded-2xl border border-[#D8C3B5] bg-[#F7F3EE] px-4 py-3 outline-none transition focus:border-[#B76E79] dark:border-[#4A3E43] dark:bg-[#171416]"
                 />
 
@@ -314,28 +371,58 @@ export default function Reservations() {
               <div>
                 <p className="mb-3 text-sm font-medium">Horario</p>
 
-                <div className="grid grid-cols-3 gap-3">
-                  {times.map((time) => (
-                    <button
-                      key={time}
-                      type="button"
-                      onClick={() => {
-                        setSelectedTime(time);
+                {isLoadingTimes && (
+                  <p className="mb-3 text-sm text-[#6E6266] dark:text-[#B9ADB1]">
+                    Consultando horarios disponibles...
+                  </p>
+                )}
 
-                        setFieldErrors((current) => ({
-                          ...current,
-                          time: undefined,
-                        }));
-                      }}
-                      className={`rounded-xl border px-3 py-2 text-sm transition ${
-                        selectedTime === time
-                          ? "border-[#B76E79] bg-[#B76E79] text-white"
-                          : "border-[#D8C3B5] hover:border-[#B76E79] dark:border-[#4A3E43]"
-                      }`}
-                    >
-                      {time}
-                    </button>
-                  ))}
+                {availabilityError && (
+                  <p className="mb-3 text-sm text-[#B76E79]">
+                    {availabilityError}
+                  </p>
+                )}
+                <div className="grid grid-cols-3 gap-3">
+                  {times
+                    .filter((time) => {
+                      if (occupiedTimes.includes(time)) {
+                        return false;
+                      }
+
+                      if (selectedDate !== getToday()) {
+                        return true;
+                      }
+
+                      const [hours, minutes] = time.split(":").map(Number);
+
+                      const now = new Date();
+                      const slotTime = new Date();
+
+                      slotTime.setHours(hours, minutes, 0, 0);
+
+                      return slotTime > now;
+                    })
+                    .map((time) => (
+                      <button
+                        key={time}
+                        type="button"
+                        onClick={() => {
+                          setSelectedTime(time);
+
+                          setFieldErrors((current) => ({
+                            ...current,
+                            time: undefined,
+                          }));
+                        }}
+                        className={`rounded-xl border px-3 py-2 text-sm transition ${
+                          selectedTime === time
+                            ? "border-[#B76E79] bg-[#B76E79] text-white"
+                            : "border-[#D8C3B5] hover:border-[#B76E79] dark:border-[#4A3E43]"
+                        }`}
+                      >
+                        {time}
+                      </button>
+                    ))}
                 </div>
 
                 {fieldErrors.time?.[0] && (

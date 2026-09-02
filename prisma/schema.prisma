@@ -24,6 +24,7 @@ model Reservation {
   date         DateTime          @db.Date
   time         String
   status       ReservationStatus @default(PENDING)
+  bookingKey String? @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
