@@ -382,6 +382,27 @@ export default function Reservations() {
                     {availabilityError}
                   </p>
                 )}
+                {!isLoadingTimes &&
+                  !availabilityError &&
+                  selectedProfessional &&
+                  selectedDate &&
+                  times.filter((time) => {
+                    if (occupiedTimes.includes(time)) return false;
+
+                    if (selectedDate !== getToday()) return true;
+
+                    const [hours, minutes] = time.split(":").map(Number);
+
+                    const now = new Date();
+                    const slotTime = new Date();
+                    slotTime.setHours(hours, minutes, 0, 0);
+
+                    return slotTime > now;
+                  }).length === 0 && (
+                    <p className="mb-3 text-sm text-[#B76E79]">
+                      No quedan horarios disponibles para esta fecha.
+                    </p>
+                  )}
                 <div className="grid grid-cols-3 gap-3">
                   {times
                     .filter((time) => {
