@@ -475,8 +475,7 @@ export default function Reservations() {
               </button>
 
               <p className="text-center text-xs text-[#8C7B80]">
-                Demo en desarrollo — los datos aún no se almacenan en una base
-                de datos.
+                Sistema de reservas online con disponibilidad en tiempo real.
               </p>
             </form>
           </div>

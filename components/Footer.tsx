@@ -2,7 +2,7 @@ import {
   FaInstagram, FaFacebookF, FaTiktok, FaWhatsapp, FaLinkedinIn, FaXTwitter,} from "react-icons/fa6";
 export default function Footer() {
   return (
-    <footer className="mt-auto border-t border-[#DED3CB] bg-[#F7F3EE] px-6 py-14 text-[#2B2528] transition-colors dark:border-[#3B3236] dark:bg-[#171416] dark:text-[#F7F3EE] md:px-24">
+    <footer id="contacto" className="mt-auto border-t border-[#DED3CB] bg-[#F7F3EE] px-6 py-14 text-[#2B2528] transition-colors dark:border-[#3B3236] dark:bg-[#171416] dark:text-[#F7F3EE] md:px-24">
       <div className="mx-auto grid max-w-6xl gap-10 text-left md:grid-cols-4">
         <div>
           <h2 className="text-xl font-semibold tracking-[0.18em]">ELARA</h2>

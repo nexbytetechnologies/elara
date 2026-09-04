@@ -6,30 +6,29 @@ import Reservations from "@/components/Reservations";
 import Footer from "@/components/Footer";
 
 export default function LandingPage() {
-
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-500">
-      
-      {/* Navbar */}   
+      {/* Navbar */}
       <Navbar />
+      
+      <main>
+        {/* Hero Section */}
+        <Hero />
 
-      {/* Hero Section */}
-      <Hero />
+        {/* Services */}
+        <Services />
 
-      {/* Services */}
-      <Services />
+        {/* About */}
+        <About />
 
-      {/* About */}
-      <About />
-
-      {/*/Resevations */}
-      <Reservations />
+        {/*/Resevations */}
+        <Reservations />
+      </main>
 
       {/* Footer */}
       <Footer />
 
       {/* Mobile Nav Overlay */}
-     
     </div>
   );
 }

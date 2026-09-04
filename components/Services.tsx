@@ -99,7 +99,7 @@ export default function Services() {
 
                 <a
                   href="#reservas"
-                  className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-[#B76E79] transition-all duration-300 group-hover:gap-3"
+                  className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-[#98505D] dark:text-[#CC8490] transition-all duration-300 group-hover:gap-3"
                 >
                   Reservar servicio
                   <span>→</span>

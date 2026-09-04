@@ -58,7 +58,7 @@ export default function About() {
                 className="group rounded-2xl border border-[#DDD0C8]/80 bg-white/50 p-6 backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-[#B76E79] hover:shadow-lg hover:shadow-[#B76E79]/10 dark:border-[#3B3236] dark:bg-[#211C1F]/70"
               >
                 <div className="flex gap-5">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#EFE7E1] text-[#B76E79] dark:bg-[#241F22]">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#EFE7E1] text-[#98505D] dark:text-[#CC8490] dark:bg-[#241F22]">
                     <Icon size={21} />
                   </div>
 
