@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
 import { Menu, Moon, Sun, X } from "lucide-react";
 
 export default function Navbar() {
@@ -30,7 +29,10 @@ export default function Navbar() {
   return (
     <>
       <header className="fixed top-0 z-50 flex w-full items-center justify-between border-b border-[#DED3CB] bg-[#F7F3EE]/85 px-8 py-4 backdrop-blur-md dark:border-white/10 dark:bg-[#171416]/85">
-        <a className="text-lg font-semibold tracking-[0.18em] text-[#2B2528] dark:text-[#F7F3EE]">
+        <a
+          href="#inicio"
+          className="text-lg font-semibold tracking-[0.18em] text-[#2B2528] dark:text-[#F7F3EE]"
+        >
           ÉLARA STUDIO
         </a>
 
@@ -75,22 +77,16 @@ export default function Navbar() {
           <button
             type="button"
             onClick={toggleTheme}
-            className="relative flex h-7 w-14 cursor-pointer items-center rounded-full bg-gray-200 p-1 shadow-inner transition-colors dark:bg-zinc-800"
+            className="relative flex h-7 w-14 cursor-pointer items-center rounded-full bg-[#DED3CB] p-1 shadow-inner transition-colors dark:bg-[#3B3236]"
             aria-label="Cambiar entre modo claro y oscuro"
           >
-            <motion.span
-              className="flex h-5 w-5 translate-x-0 items-center justify-center rounded-full bg-white shadow-md transition-transform duration-300 dark:translate-x-7 dark:bg-zinc-400"
-            >
-              <Sun
-                size={12}
-                className="text-yellow-500 dark:hidden"
-              />
-
+            <span className="flex h-5 w-5 translate-x-0 items-center justify-center rounded-full bg-white shadow-md transition-transform duration-300 dark:translate-x-7 dark:bg-[#B9ADB1]">
+              <Sun size={12} className="text-yellow-600 dark:hidden" />
               <Moon
                 size={12}
-                className="hidden text-zinc-900 dark:block"
+                className="hidden text-[#2B2528] dark:block"
               />
-            </motion.span>
+            </span>
           </button>
         </nav>
 
@@ -107,28 +103,29 @@ export default function Navbar() {
       </header>
 
       {/* Menú móvil */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.nav
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 100 }}
-            className="fixed inset-0 z-40 flex flex-col gap-8 bg-white p-8 pt-32 text-4xl font-bold dark:bg-black md:hidden"
-          >
-            <a href="#inicio" onClick={() => setMenuOpen(false)}>
-              Inicio
-            </a>
+      {menuOpen && (
+        <nav className="fixed inset-0 z-40 flex flex-col gap-8 bg-[#F7F3EE] p-8 pt-32 text-4xl font-bold text-[#2B2528] dark:bg-[#171416] dark:text-[#F7F3EE] md:hidden">
+          <a href="#inicio" onClick={() => setMenuOpen(false)}>
+            Inicio
+          </a>
 
-            <a href="#servicios" onClick={() => setMenuOpen(false)}>
-              Servicios
-            </a>
+          <a href="#servicios" onClick={() => setMenuOpen(false)}>
+            Servicios
+          </a>
 
-            <a href="#contacto" onClick={() => setMenuOpen(false)}>
-              Contacto
-            </a>
-          </motion.nav>
-        )}
-      </AnimatePresence>
+          <a href="#nosotros" onClick={() => setMenuOpen(false)}>
+            Nosotros
+          </a>
+
+          <a href="#reservas" onClick={() => setMenuOpen(false)}>
+            Reservas
+          </a>
+
+          <a href="#contacto" onClick={() => setMenuOpen(false)}>
+            Contacto
+          </a>
+        </nav>
+      )}
     </>
   );
 }

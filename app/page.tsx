@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import About from "@/components/About";
-import Reservations from "@/components/Reservations";
+import Reservations from "@/components/ReservationForm";
 import Footer from "@/components/Footer";
 
 export default function LandingPage() {

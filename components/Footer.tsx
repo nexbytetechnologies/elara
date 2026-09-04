@@ -91,7 +91,7 @@ export default function Footer() {
         </a>
       </div>
 
-      <p className="text-xs uppercase tracking-widest opacity-40">
+      <p className="text-xs uppercase tracking-widest text-[#6E6266] dark:text-[#B9ADB1]">
         © 2026 ELARA — Todos los derechos reservados
       </p>
     </footer>

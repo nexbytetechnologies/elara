@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ÉLARA Studio
 
-## Getting Started
+Plataforma web de reservas para un centro de belleza, desarrollada como proyecto demostrativo por **Nexbyte Technologies**.
 
-First, run the development server:
+Permite seleccionar servicios, profesionales, fechas y horarios disponibles mediante una experiencia moderna, responsive y conectada a una base de datos PostgreSQL.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🌐 Demo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+https://elara-nexbyte.vercel.app/
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Funcionalidades
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Reserva de servicios online
+- Selección de profesional
+- Consulta de disponibilidad en tiempo real
+- Bloqueo de horarios ya reservados
+- Validación de fechas y horarios
+- Validación de formularios en frontend y backend
+- Persistencia de reservas en PostgreSQL
+- Prevención de reservas duplicadas
+- Diseño responsive
+- Modo claro y oscuro
+- SEO y Open Graph
+- Accesibilidad optimizada
+- Arquitectura basada en Server y Client Components
 
-## Learn More
+## 🛠 Tecnologías
 
-To learn more about Next.js, take a look at the following resources:
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- Prisma ORM
+- PostgreSQL
+- Zod
+- Vercel
+- Prisma Postgres
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 Arquitectura
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```text
+app/
+├── api/
+│   └── reservations/
+├── generated/
+├── layout.tsx
+└── page.tsx
 
-## Deploy on Vercel
+components/
+├── About.tsx
+├── Footer.tsx
+├── Hero.tsx
+├── Navbar.tsx
+├── ReservationForm.tsx
+├── Reservations.tsx
+└── Services.tsx
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+lib/
+├── prisma.ts
+└── validations/
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+prisma/
+├── migrations/
+└── schema.prisma
+
+public/
+└── og-elara.webp

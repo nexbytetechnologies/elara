@@ -32,13 +32,13 @@ export default function About() {
         <div className="grid items-center gap-16 lg:grid-cols-2">
           {/* Texto principal */}
           <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.35em] text-[#B76E79]">
+            <span className="text-xs font-semibold uppercase tracking-[0.35em] text-[#98505D] dark:text-[#CC8490]">
               Sobre Elara
             </span>
 
             <h2 className="mt-5 text-4xl font-bold tracking-tight md:text-5xl">
               Más que un servicio,
-              <span className="block text-[#B76E79]">
+              <span className="block text-[#98505D] dark:text-[#CC8490]">
                 una experiencia para ti.
               </span>
             </h2>

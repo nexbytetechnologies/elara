@@ -51,13 +51,13 @@ export default function Services() {
     >
       <div className="mx-auto max-w-7xl">
         <div className="max-w-2xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#B76E79]">
+          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#98505D] dark:text-[#CC8490]">
             Nuestros servicios
           </p>
 
           <h2 className="mt-5 text-4xl font-semibold tracking-tight md:text-5xl">
             Cuidado pensado
-            <span className="block text-[#B76E79]">para cada detalle.</span>
+            <span className="block text-[#98505D] dark:text-[#CC8490]">para cada detalle.</span>
           </h2>
 
           <p className="mt-6 max-w-xl leading-7 text-[#6E6266] dark:text-[#B9ADB1]">
@@ -80,11 +80,11 @@ export default function Services() {
 
               <div className="relative z-10">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold tracking-widest text-[#B76E79]">
+                  <span className="text-xs font-semibold tracking-widest text-[#98505D] dark:text-[#CC8490]">
                     {service.number}
                   </span>
 
-                  <span className="rounded-full border border-[#D8C3B5]/60 bg-white/30 px-3 py-1 text-xs text-[#8C7B80] backdrop-blur-sm dark:border-[#5B4D52]/60 dark:bg-white/5 dark:text-[#B9ADB1]">
+                  <span className="rounded-full border border-[#D8C3B5]/60 bg-white/30 px-3 py-1 text-xs text-[#6E6266] dark:text-[#B9ADB1], backdrop-blur-sm dark:border-[#5B4D52]/60 dark:bg-white/5 dark:text-[#B9ADB1]">
                     {service.price}
                   </span>
                 </div>
